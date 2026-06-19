@@ -36,9 +36,9 @@ section "System update & base packages"
 apt-get update -q
 apt-get install -y -q \
     curl wget gnupg2 ca-certificates lsb-release \
-    git unzip software-properties-common apt-transport-https
+    git unzip apt-transport-https
 
-# ── PHP 8.2 ──────────────────────────────────────────────────────────────────
+# ── PHP 8.2 (via packages.sury.org – Debian native) ──────────────────────────
 section "PHP $PHP_VERSION"
 if ! dpkg -l | grep -q "php${PHP_VERSION}-fpm"; then
     curl -fsSL "https://packages.sury.org/php/apt.gpg" \
