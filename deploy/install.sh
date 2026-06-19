@@ -187,16 +187,12 @@ server {
         try_files \$uri \$uri/ /index.html;
     }
 
-    # API → PHP-FPM
+    # API → PHP-FPM (Slim 4 – all requests go to index.php)
     location /api/ {
-        alias ${BACKEND_DIR}/public/;
-        try_files \$uri /api/index.php\$is_args\$args;
-
-        location ~ \.php$ {
-            include snippets/fastcgi-php.conf;
-            fastcgi_pass unix:/run/php/php${PHP_VERSION}-fpm-kohlplan.sock;
-            fastcgi_param SCRIPT_FILENAME ${BACKEND_DIR}/public/index.php;
-        }
+        fastcgi_pass unix:/run/php/php${PHP_VERSION}-fpm-kohlplan.sock;
+        fastcgi_param SCRIPT_FILENAME ${BACKEND_DIR}/public/index.php;
+        include fastcgi_params;
+        fastcgi_param REQUEST_URI \$request_uri;
     }
 
     # Security headers
