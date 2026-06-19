@@ -189,9 +189,9 @@ server {
 
     # API → PHP-FPM (Slim 4 – all requests go to index.php)
     location /api/ {
+        include fastcgi_params;
         fastcgi_pass unix:/run/php/php${PHP_VERSION}-fpm-kohlplan.sock;
         fastcgi_param SCRIPT_FILENAME ${BACKEND_DIR}/public/index.php;
-        include fastcgi_params;
         fastcgi_param REQUEST_URI \$request_uri;
     }
 
