@@ -13,7 +13,7 @@ class Database
     private function __construct()
     {
         $host = $_ENV['DB_HOST'] ?? 'localhost';
-        $name = $_ENV['DB_NAME'] ?? 'eventmanager';
+        $name = $_ENV['DB_NAME'] ?? 'kohlplan';
         $user = $_ENV['DB_USER'] ?? 'root';
         $pass = $_ENV['DB_PASS'] ?? '';
 

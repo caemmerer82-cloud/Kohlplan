@@ -1,6 +1,6 @@
 {
-  "name": "eventmanager/backend",
-  "description": "Event Manager Backend API",
+  "name": "kohlplan/backend",
+  "description": "Kohlplan Backend API",
   "type": "project",
   "require": {
     "php": ">=8.0",

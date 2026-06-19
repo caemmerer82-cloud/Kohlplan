@@ -111,7 +111,7 @@ export default function SystemDashboardPage() {
             <CalendarIcon className="h-5 w-5 text-white" />
           </div>
           <div>
-            <h1 className="font-semibold">Event Manager</h1>
+            <h1 className="font-semibold">Kohlplan</h1>
             <p className="text-primary-300 text-xs">Systemadministration</p>
           </div>
         </div>

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # =============================================================================
 #  Eventmanager – 1-Click Installer for Debian 12 (Bookworm)
-#  Usage:  curl -fsSL https://raw.githubusercontent.com/YOUR_USER/eventmanager/main/deploy/install.sh | sudo bash
+#  Usage:  curl -fsSL https://raw.githubusercontent.com/YOUR_USER/kohlplan/main/deploy/install.sh | sudo bash
 # =============================================================================
 set -euo pipefail
 
@@ -17,10 +17,10 @@ section() { echo -e "\n${GREEN}━━━ $* ━━━${NC}"; }
 
 # ── Config (edit before running, or set as env vars) ─────────────────────────
 REPO_URL="${REPO_URL:-https://github.com/caemmerer82-cloud/Kohlplan.git}"
-INSTALL_DIR="${INSTALL_DIR:-/opt/eventmanager}"
-APP_DOMAIN="${APP_DOMAIN:-}"          # e.g. eventmanager.example.com – leave empty for IP-only
-DB_NAME="${DB_NAME:-eventmanager}"
-DB_USER="${DB_USER:-eventmanager}"
+INSTALL_DIR="${INSTALL_DIR:-/opt/kohlplan}"
+APP_DOMAIN="${APP_DOMAIN:-}"          # e.g. kohlplan.example.com – leave empty for IP-only
+DB_NAME="${DB_NAME:-kohlplan}"
+DB_USER="${DB_USER:-kohlplan}"
 DB_PASS="${DB_PASS:-$(openssl rand -hex 16)}"
 JWT_SECRET="${JWT_SECRET:-$(openssl rand -hex 32)}"
 PHP_VERSION="8.2"
@@ -30,7 +30,7 @@ NODE_MAJOR="20"
 BACKEND_DIR="$INSTALL_DIR/backend"
 FRONTEND_DIST="$INSTALL_DIR/frontend/dist"
 UPLOAD_DIR="$INSTALL_DIR/uploads"
-NGINX_CONF="/etc/nginx/sites-available/eventmanager"
+NGINX_CONF="/etc/nginx/sites-available/kohlplan"
 
 section "System update & base packages"
 apt-get update -q
@@ -153,11 +153,11 @@ chmod -R 770 "$UPLOAD_DIR"
 
 # ── PHP-FPM pool ──────────────────────────────────────────────────────────────
 section "PHP-FPM pool"
-cat > "/etc/php/${PHP_VERSION}/fpm/pool.d/eventmanager.conf" <<FPM
-[eventmanager]
+cat > "/etc/php/${PHP_VERSION}/fpm/pool.d/kohlplan.conf" <<FPM
+[kohlplan]
 user  = www-data
 group = www-data
-listen = /run/php/php${PHP_VERSION}-fpm-eventmanager.sock
+listen = /run/php/php${PHP_VERSION}-fpm-kohlplan.sock
 listen.owner = www-data
 listen.group = www-data
 pm = dynamic
@@ -165,7 +165,7 @@ pm.max_children     = 10
 pm.start_servers    = 2
 pm.min_spare_servers = 1
 pm.max_spare_servers = 4
-php_admin_value[error_log] = /var/log/php-eventmanager-error.log
+php_admin_value[error_log] = /var/log/php-kohlplan-error.log
 FPM
 systemctl restart "php${PHP_VERSION}-fpm"
 info "PHP-FPM pool configured"
@@ -193,7 +193,7 @@ server {
 
         location ~ \.php$ {
             include snippets/fastcgi-php.conf;
-            fastcgi_pass unix:/run/php/php${PHP_VERSION}-fpm-eventmanager.sock;
+            fastcgi_pass unix:/run/php/php${PHP_VERSION}-fpm-kohlplan.sock;
             fastcgi_param SCRIPT_FILENAME ${BACKEND_DIR}/public/index.php;
         }
     }
@@ -205,11 +205,11 @@ server {
     # Upload size
     client_max_body_size 11M;
 
-    access_log /var/log/nginx/eventmanager-access.log;
-    error_log  /var/log/nginx/eventmanager-error.log;
+    access_log /var/log/nginx/kohlplan-access.log;
+    error_log  /var/log/nginx/kohlplan-error.log;
 }
 NGINX
-ln -sf "$NGINX_CONF" /etc/nginx/sites-enabled/eventmanager
+ln -sf "$NGINX_CONF" /etc/nginx/sites-enabled/kohlplan
 rm -f /etc/nginx/sites-enabled/default
 nginx -t
 systemctl reload nginx
