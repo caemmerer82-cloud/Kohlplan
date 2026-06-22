@@ -16,7 +16,7 @@ section() { echo -e "\n${GREEN}━━━ $* ━━━${NC}"; }
 [[ $EUID -ne 0 ]] && error "Please run as root (sudo)."
 
 # ── Config (edit before running, or set as env vars) ─────────────────────────
-REPO_URL="${REPO_URL:-https://github.com/caemmerer82-cloud/Festivo-Event.git}"
+REPO_URL="${REPO_URL:-https://github.com/caemmerer82-cloud/festivo-event.git}"
 INSTALL_DIR="${INSTALL_DIR:-/opt/festivo-event}"
 APP_DOMAIN="${APP_DOMAIN:-}"          # e.g. "festivo-event.de,www.festivo-event.de" – leave empty for IP-only
 DB_NAME="${DB_NAME:-festivo_event}"
@@ -97,7 +97,7 @@ if [[ -d "$INSTALL_DIR/.git" ]]; then
 else
     info "Cloning $REPO_URL → $INSTALL_DIR"
     GIT_TERMINAL_PROMPT=0 git clone "$REPO_URL" "$INSTALL_DIR" \
-        || error "Clone fehlgeschlagen. Bei privatem Repo: SSH-Key hinterlegen und REPO_URL=git@github.com:caemmerer82-cloud/Festivo-Event.git setzen."
+        || error "Clone fehlgeschlagen. Bei privatem Repo: SSH-Key hinterlegen und REPO_URL=git@github.com:caemmerer82-cloud/festivo-event.git setzen."
 fi
 
 # ── Database setup ────────────────────────────────────────────────────────────
