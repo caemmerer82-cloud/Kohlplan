@@ -8,6 +8,7 @@ import {
   Cog6ToothIcon,
   DocumentTextIcon,
   ArrowRightOnRectangleIcon,
+  BugAntIcon,
 } from '@heroicons/react/24/outline';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -84,6 +85,13 @@ export default function Sidebar() {
             {label}
           </NavLink>
         ))}
+        <a
+          href="mailto:bcaemmerer@gmx.de?subject=Festivo-Event%20Bugreport"
+          className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-primary-200 hover:bg-primary-800 hover:text-white transition-colors"
+        >
+          <BugAntIcon className="h-5 w-5 flex-shrink-0" />
+          Bugreport
+        </a>
       </nav>
 
       {/* User */}

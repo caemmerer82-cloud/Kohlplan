@@ -80,7 +80,7 @@ CREATE TABLE persons (
   notes TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (tenant_id) REFERENCES tenants(id) ON DELETE CASCADE,
-  UNIQUE KEY (tenant_id, email)
+  INDEX (tenant_id, email)
 );
 
 -- Events per tenant
