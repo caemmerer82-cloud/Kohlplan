@@ -295,7 +295,7 @@ export default function MailsPage() {
         )
       ) : tab === 'log' ? (
         /* Mail log */
-        <div className="card p-0">
+        <div className="card p-0 overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-200 bg-gray-50">
@@ -414,7 +414,7 @@ export default function MailsPage() {
               ) : availableGuests.length === 0 ? (
                 <p className="text-center text-gray-400 py-8 text-sm">Keine Gäste für diese Veranstaltung</p>
               ) : (
-                <div className="max-h-80 overflow-y-auto">
+                <div className="max-h-80 overflow-y-auto overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="border-b border-gray-100 bg-gray-50">
@@ -475,7 +475,7 @@ export default function MailsPage() {
         size="xl"
       >
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <FormField label="Name" required>
               <input className="input" value={name} onChange={(e) => setName(e.target.value)} placeholder="z.B. Einladung zur Jahresfeier" />
             </FormField>

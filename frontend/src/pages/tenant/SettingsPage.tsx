@@ -153,8 +153,8 @@ export default function SettingsPage() {
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-              <div className="grid grid-cols-3 gap-4">
-                <div className="col-span-2">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="sm:col-span-2">
                   <FormField label="SMTP-Host" required error={errors.host?.message}>
                     <input
                       {...register('host', { required: 'Pflichtfeld' })}
@@ -181,7 +181,7 @@ export default function SettingsPage() {
                 </select>
               </FormField>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <FormField label="Benutzername" required error={errors.username?.message}>
                   <input
                     {...register('username', { required: 'Pflichtfeld' })}
@@ -200,7 +200,7 @@ export default function SettingsPage() {
                 </FormField>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <FormField label="Absender-E-Mail" required error={errors.from_email?.message}>
                   <input
                     {...register('from_email', { required: 'Pflichtfeld' })}

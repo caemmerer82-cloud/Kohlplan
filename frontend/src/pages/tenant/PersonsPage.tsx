@@ -218,6 +218,7 @@ export default function PersonsPage() {
             <p className="text-gray-500">Keine Personen gefunden</p>
           </div>
         ) : (
+          <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-200 bg-gray-50">
@@ -257,6 +258,7 @@ export default function PersonsPage() {
               ))}
             </tbody>
           </table>
+          </div>
         )}
         <Pagination page={page} pages={pages} total={total} limit={50} onPage={setPage} />
       </div>
@@ -268,7 +270,7 @@ export default function PersonsPage() {
         title={editPerson ? 'Person bearbeiten' : 'Neue Person'}
       >
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <FormField label="Vorname" required error={errors.first_name?.message}>
               <input {...register('first_name', { required: 'Pflichtfeld' })} className="input" />
             </FormField>

@@ -138,6 +138,7 @@ export default function UsersPage() {
             <p className="text-gray-500">Keine Benutzer vorhanden</p>
           </div>
         ) : (
+          <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-200 bg-gray-50">
@@ -191,6 +192,7 @@ export default function UsersPage() {
               ))}
             </tbody>
           </table>
+          </div>
         )}
       </div>
 
@@ -202,7 +204,7 @@ export default function UsersPage() {
         size="lg"
       >
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <FormField label="Benutzername" required error={errors.username?.message}>
               <input
                 {...register('username', { required: editUser ? false : 'Pflichtfeld' })}
@@ -230,7 +232,7 @@ export default function UsersPage() {
           {!isAdmin && (
             <div>
               <p className="label mb-2">Berechtigungen</p>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {PERMISSIONS.map(p => (
                   <label key={p.key} className="flex items-center gap-2 cursor-pointer">
                     <input {...register(p.key)} type="checkbox" className="rounded border-gray-300 text-primary-600" />

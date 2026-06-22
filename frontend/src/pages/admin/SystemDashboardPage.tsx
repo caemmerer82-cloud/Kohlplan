@@ -128,9 +128,9 @@ export default function SystemDashboardPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-primary-950 text-white px-8 py-4 flex items-center justify-between">
+      <header className="bg-primary-950 text-white px-4 sm:px-8 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-primary-400 rounded-lg flex items-center justify-center">
+          <div className="w-8 h-8 bg-primary-400 rounded-lg flex items-center justify-center flex-shrink-0">
             <CalendarIcon className="h-5 w-5 text-white" />
           </div>
           <div>
@@ -138,7 +138,7 @@ export default function SystemDashboardPage() {
             <p className="text-primary-300 text-xs">Systemadministration</p>
           </div>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
           <span className="text-primary-300 text-sm">{user?.username}</span>
           <button
             onClick={() => setShowOwnPassword(true)}
@@ -158,8 +158,8 @@ export default function SystemDashboardPage() {
       </header>
 
       {/* Main content */}
-      <main className="p-8 max-w-5xl mx-auto">
-        <div className="flex items-center justify-between mb-6">
+      <main className="p-4 sm:p-8 max-w-5xl mx-auto">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
           <div>
             <h2 className="text-xl font-semibold text-gray-900">Mandanten</h2>
             <p className="text-sm text-gray-500 mt-0.5">{tenants.length} Mandant(en) vorhanden</p>
@@ -183,29 +183,31 @@ export default function SystemDashboardPage() {
               </div>
             )}
             {tenants.map((tenant) => (
-              <div key={tenant.id} className="card flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center flex-shrink-0">
-                  <span className="text-primary-700 font-semibold text-sm">
-                    {tenant.name[0].toUpperCase()}
-                  </span>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <h3 className="font-semibold text-gray-900">{tenant.name}</h3>
-                    <span className={`badge ${tenant.is_active ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
-                      {tenant.is_active ? 'Aktiv' : 'Inaktiv'}
+              <div key={tenant.id} className="card flex flex-col sm:flex-row sm:items-center gap-4">
+                <div className="flex items-center gap-4 flex-1 min-w-0">
+                  <div className="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center flex-shrink-0">
+                    <span className="text-primary-700 font-semibold text-sm">
+                      {tenant.name[0].toUpperCase()}
                     </span>
                   </div>
-                  <div className="flex items-center gap-4 mt-0.5 text-sm text-gray-500">
-                    <span className="font-mono text-xs bg-gray-100 px-1.5 py-0.5 rounded">{tenant.slug}</span>
-                    <span className="flex items-center gap-1">
-                      <UsersIcon className="h-3.5 w-3.5" />
-                      {tenant.user_count ?? 0} Benutzer
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <CalendarIcon className="h-3.5 w-3.5" />
-                      {tenant.event_count ?? 0} Events
-                    </span>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <h3 className="font-semibold text-gray-900">{tenant.name}</h3>
+                      <span className={`badge ${tenant.is_active ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
+                        {tenant.is_active ? 'Aktiv' : 'Inaktiv'}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-4 mt-0.5 text-sm text-gray-500 flex-wrap">
+                      <span className="font-mono text-xs bg-gray-100 px-1.5 py-0.5 rounded">{tenant.slug}</span>
+                      <span className="flex items-center gap-1">
+                        <UsersIcon className="h-3.5 w-3.5" />
+                        {tenant.user_count ?? 0} Benutzer
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <CalendarIcon className="h-3.5 w-3.5" />
+                        {tenant.event_count ?? 0} Events
+                      </span>
+                    </div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 flex-shrink-0">
@@ -239,7 +241,7 @@ export default function SystemDashboardPage() {
       {/* Create Tenant Modal */}
       <Modal isOpen={showCreate} onClose={() => { setShowCreate(false); createForm.reset(); }} title="Neuen Mandanten erstellen" size="lg">
         <form onSubmit={createForm.handleSubmit(handleCreate)} className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <FormField label="Name" required error={createForm.formState.errors.name?.message}>
               <input
                 {...createForm.register('name', { required: 'Pflichtfeld' })}
@@ -260,7 +262,7 @@ export default function SystemDashboardPage() {
           </div>
           <hr />
           <p className="text-sm font-medium text-gray-700">Admin-Konto</p>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <FormField label="Benutzername" required error={createForm.formState.errors.admin_username?.message}>
               <input
                 {...createForm.register('admin_username', { required: 'Pflichtfeld' })}

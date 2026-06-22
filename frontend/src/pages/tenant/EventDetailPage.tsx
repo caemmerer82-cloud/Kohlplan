@@ -661,8 +661,8 @@ export default function EventDetailPage() {
       {/* Edit event modal */}
       <Modal isOpen={showEdit} onClose={() => setShowEdit(false)} title="Veranstaltung bearbeiten" size="lg">
         <form onSubmit={handleSaveEdit} className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="col-span-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="sm:col-span-2">
               <FormField label="Name" required>
                 <input className="input" value={editName} onChange={e => setEditName(e.target.value)} required />
               </FormField>
@@ -673,7 +673,7 @@ export default function EventDetailPage() {
             <FormField label="Ort">
               <input className="input" value={editLocation} onChange={e => setEditLocation(e.target.value)} placeholder="z.B. Berlin, Hauptsaal" />
             </FormField>
-            <div className="col-span-2">
+            <div className="sm:col-span-2">
               <FormField label="Beschreibung">
                 <textarea className="input" rows={3} value={editDescription} onChange={e => setEditDescription(e.target.value)} />
               </FormField>

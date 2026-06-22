@@ -134,8 +134,8 @@ export default function EventsPage() {
   };
 
   const eventFormFields = (
-    <div className="grid grid-cols-2 gap-4">
-      <div className="col-span-2">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="sm:col-span-2">
         <FormField label="Name" required>
           <input
             className="input"
@@ -163,7 +163,7 @@ export default function EventsPage() {
           placeholder="z.B. Berlin, Hauptsaal"
         />
       </FormField>
-      <div className="col-span-2">
+      <div className="sm:col-span-2">
         <FormField label="Beschreibung">
           <textarea
             className="input"
